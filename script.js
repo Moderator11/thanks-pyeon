@@ -211,3 +211,67 @@ function createEmbers() {
 
 // 0.2초마다 불티 생성
 setInterval(createEmbers, 200);
+
+// 1. Scroll Progress & Top Button Logic
+const progressBar = document.getElementById("progressBar");
+const topBtn = document.getElementById("topBtn");
+const shareBtn = document.getElementById("shareBtn");
+
+window.addEventListener("scroll", () => {
+  // 프로그레스 바 계산
+  const scrollTop =
+    document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+  const scrolled = (scrollTop / scrollHeight) * 100;
+  progressBar.style.width = scrolled + "%";
+
+  // Top 버튼 표시/숨김 (스크롤 300px 이상일 때)
+  if (scrollTop > 300) {
+    topBtn.classList.add("show");
+  } else {
+    topBtn.classList.remove("show");
+  }
+});
+
+// Top 버튼 클릭 시
+topBtn.addEventListener("click", () => {
+  // 부드럽게 위로 이동
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  // 햅틱 피드백 (모바일 지원 시)
+  if (navigator.vibrate) navigator.vibrate(10);
+});
+
+// 2. Share Button (Native Share API)
+shareBtn.addEventListener("click", async () => {
+  // 햅틱 피드백
+  if (navigator.vibrate) navigator.vibrate(10);
+
+  const shareData = {
+    title: "To Prof. Pyeon",
+    text: "편재호 교수님께 드리는 감사 편지",
+    url: window.location.href,
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      // PC 등 지원 안 하는 경우 클립보드 복사
+      await navigator.clipboard.writeText(window.location.href);
+      alert("주소가 복사되었습니다!");
+    }
+  } catch (err) {
+    console.log("Share canceled");
+  }
+});
+
+// 3. Haptic Feedback on 'Start' Button
+const introStartBtn = document.getElementById("startBtn");
+if (introStartBtn) {
+  introStartBtn.addEventListener("click", () => {
+    // 웅장한 진동 (지원 기기만)
+    if (navigator.vibrate) navigator.vibrate([50, 50, 50]);
+  });
+}
