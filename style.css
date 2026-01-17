@@ -463,3 +463,159 @@ h1 {
   position: relative;
   z-index: 2;
 }
+
+/* 모닥불 영역 스타일 */
+.campfire-footer {
+  position: relative;
+  height: 300px;
+  background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 40px;
+  z-index: 5;
+  overflow: hidden;
+  margin-top: -100px; /* 자연스럽게 겹치도록 */
+}
+
+.campfire-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+/* 1. 광원 효과 */
+.fire-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 100, 0, 0.4) 0%,
+    transparent 70%
+  );
+  animation: glowPulse 4s infinite alternate;
+  filter: blur(20px);
+}
+
+/* 2. 장작 */
+.logs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+}
+.log {
+  position: absolute;
+  bottom: 0;
+  width: 60px;
+  height: 15px;
+  background: #4a3b2a;
+  border-radius: 10px;
+}
+.log.left {
+  left: 10px;
+  transform: rotate(15deg);
+}
+.log.right {
+  right: 10px;
+  transform: rotate(-15deg);
+}
+
+/* 3. 불꽃 애니메이션 */
+.flames {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+}
+.flame {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50% 50% 20% 20%;
+  transform-origin: bottom center;
+  filter: blur(2px);
+}
+.flame.one {
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 69, 0, 0.7); /* Red-Orange */
+  animation: burn 1s infinite alternate ease-in-out;
+}
+.flame.two {
+  left: 20px;
+  width: 30px;
+  height: 50px;
+  background: rgba(255, 140, 0, 0.6); /* Dark Orange */
+  animation: burn 1.5s infinite alternate ease-in-out 0.2s;
+}
+.flame.three {
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 215, 0, 0.5); /* Gold */
+  animation: burn 2s infinite alternate ease-in-out 0.4s;
+}
+
+/* 4. 불티(Embers) */
+.ember {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: #ffcc00;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff4500;
+  pointer-events: none;
+  animation: rise var(--duration) linear forwards;
+  opacity: 0;
+}
+
+.footer-text {
+  font-family: serif;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.9rem;
+  margin-top: 10px;
+  letter-spacing: 0.1em;
+}
+
+/* 애니메이션 키프레임 */
+@keyframes glowPulse {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+@keyframes burn {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.1) translateY(-5px);
+    opacity: 0.4;
+  }
+}
+@keyframes rise {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift)), -150px) scale(0);
+  }
+}

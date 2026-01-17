@@ -187,3 +187,27 @@ function updateCounter() {
 
 // 기존 window.onload 안에 추가하거나 별도로 실행
 window.addEventListener("load", updateCounter);
+
+// 불티(Ember) 생성 스크립트
+function createEmbers() {
+  const container = document.getElementById("emberContainer");
+  const ember = document.createElement("div");
+  ember.className = "ember";
+
+  // 랜덤 속성 부여
+  const drift = (Math.random() - 0.5) * 100 + "px"; // 좌우 흔들림
+  const duration = Math.random() * 2 + 2 + "s"; // 2~4초 동안 상승
+
+  ember.style.setProperty("--drift", drift);
+  ember.style.setProperty("--duration", duration);
+
+  container.appendChild(ember);
+
+  // 애니메이션 끝나면 제거
+  setTimeout(() => {
+    ember.remove();
+  }, 4000);
+}
+
+// 0.2초마다 불티 생성
+setInterval(createEmbers, 200);
