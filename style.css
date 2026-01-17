@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overscroll-behavior: none; /* 스크롤 튕김(바운스) 방지 */
+}
+
 body {
   background: linear-gradient(to bottom, #0f2027 0%, #203a43 50%, #2c5364 100%);
   font-family:
