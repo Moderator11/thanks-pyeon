@@ -40,13 +40,13 @@ body {
 .intro-content {
   text-align: center;
   color: white;
-  padding: 20px;
+  padding: clamp(12px, 4vw, 24px);
   animation: float 3s ease-in-out infinite;
 }
 
 .intro-icon {
-  font-size: 3rem;
-  margin-bottom: 24px;
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: clamp(16px, 4vw, 24px);
   opacity: 0.9;
 }
 
@@ -424,4 +424,42 @@ h1 {
   .final-text {
     font-size: 1.05rem;
   }
+}
+
+/* Timer Style */
+.timer-section {
+  text-align: center;
+  padding: 60px 20px 0;
+  color: rgba(255, 255, 255, 0.9);
+  animation: fadeIn 2s ease-out;
+  position: relative;
+  z-index: 2;
+}
+.timer-label {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+.timer-count {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffd700; /* 금색 포인트 */
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  margin-bottom: 8px;
+  font-family: serif;
+}
+.timer-date {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+/* Footer Style */
+.footer {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 40px 0 80px;
+  font-size: 0.8rem;
+  position: relative;
+  z-index: 2;
 }

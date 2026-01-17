@@ -160,3 +160,30 @@ document.querySelectorAll(".card, .photo-frame, .final-card").forEach((el) => {
 window.addEventListener("load", () => {
   createSnowflakes();
 });
+
+// Timer Script
+// [설정] 처음 만난 날짜를 수정하세요 (YYYY-MM-DD)
+const startDate = new Date("2025-12-28");
+
+function updateCounter() {
+  const now = new Date();
+  const diff = now - startDate;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1; // +1일 (당일 포함)
+
+  // 숫자 카운팅 애니메이션 효과
+  const counterElement = document.getElementById("dDayCount");
+  let current = 0;
+  const increment = Math.ceil(days / 100); // 속도 조절
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= days) {
+      current = days;
+      clearInterval(timer);
+    }
+    counterElement.innerText = current.toLocaleString() + "일";
+  }, 20);
+}
+
+// 기존 window.onload 안에 추가하거나 별도로 실행
+window.addEventListener("load", updateCounter);
